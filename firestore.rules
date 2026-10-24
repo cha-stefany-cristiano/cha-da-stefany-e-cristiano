@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'vinicius.bandeira.goncalves@gmail.com';
+    }
+    match /settings/{settingId} {
+      allow read: if settingId == "event";
+      allow write: if isAdmin();
+    }
+    match /gifts/{giftId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /rsvps/{rsvpId} {
+      allow create: if request.resource.data.keys().hasOnly(['name','count','message','createdAt','status'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.count is int
+        && request.resource.data.count >= 1
+        && request.resource.data.count <= 6
+        && request.resource.data.message is string
+        && request.resource.data.message.size() <= 500
+        && request.resource.data.status == 'confirmed';
+      allow read, update, delete: if isAdmin();
+    }
+    match /reservationLocks/{giftId} {
+      // O lock contém somente IDs, sem nome do convidado; get público é necessário
+      // para a transação verificar se o presente já foi reservado.
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create: if request.resource.data.keys().hasOnly(['giftId','reservationId','createdAt'])
+        && request.resource.data.giftId == giftId
+        && request.resource.data.reservationId is string
+        && exists(/databases/$(database)/documents/gifts/$(giftId))
+        && get(/databases/$(database)/documents/gifts/$(giftId)).data.active == true;
+      allow delete: if isAdmin();
+      allow update: if false;
+    }
+    match /reservations/{reservationId} {
+      allow create: if request.resource.data.keys().hasOnly(['giftId','giftName','guestName','createdAt'])
+        && request.resource.data.giftId is string
+        && request.resource.data.giftName is string
+        && request.resource.data.guestName is string
+        && request.resource.data.guestName.size() >= 2
+        && request.resource.data.guestName.size() <= 100
+        && existsAfter(/databases/$(database)/documents/reservationLocks/$(request.resource.data.giftId))
+        && getAfter(/databases/$(database)/documents/reservationLocks/$(request.resource.data.giftId)).data.reservationId == reservationId
+        && getAfter(/databases/$(database)/documents/reservationLocks/$(request.resource.data.giftId)).data.giftId == request.resource.data.giftId;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#faf7f1">
+  <meta name="description" content="Venha celebrar conosco a chegada do nosso bebê!">
+  <title>Chá de Bebê | Stefany e Cristiano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#inicio"><span class="brand-icon">♡</span><span>Um amor que cresce</span></a>
+  <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  <nav class="main-nav"><a href="#detalhes">O encontro</a><a href="#presentes">Presentes</a><a href="#confirmar">Confirmar presença</a></nav>
+</header>
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> UM MOMENTO MUITO ESPECIAL <span></span></p>
+      <h1>Chá de <em>bebê</em></h1>
+      <p class="hero-subtitle">Nosso pequeno ou pequena está chegando,<br>e queremos celebrar com você!</p>
+      <div class="baby-name"><span></span><div><small>Esperando com amor</small><strong id="baby-name">Nome do bebê</strong></div><span></span></div>
+      <a class="button button-gold" href="#detalhes">Ver detalhes do encontro <b>↓</b></a>
+    </div>
+    <div class="hero-art hero-video" aria-label="Vídeo decorativo de ursinhos">
+      <span class="video-decoration sparkle-one">✧</span>
+      <span class="video-decoration sparkle-two">✦</span>
+      <span class="video-decoration heart-one">♡</span>
+      <span class="video-decoration heart-two">♡</span>
+      <span class="video-decoration tiny-star">✧</span>
+
+      <video
+        class="baby-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Vídeo decorativo do convite de chá de bebê"
+      >
+        <source src="./image/video.mp4" type="video/mp4">
+        Seu navegador não conseguiu reproduzir este vídeo.
+      </video>
+    </div>
+
+    <div class="hero-bottom-note">✧ &nbsp; Uma nova história começa &nbsp; ✧</div>
+  </section>
+  <section class="section details" id="detalhes">
+    <div class="section-heading"><p class="eyebrow">GUARDE ESTA DATA</p><h2>Vamos celebrar juntos?</h2><p>Será uma alegria ter você pertinho nesse dia tão especial.</p></div>
+    <div class="detail-grid">
+      <article class="detail-card"><span class="detail-icon">♡</span><small>QUANDO</small><h3 id="event-date">29 de Novembro de 2026</h3><p id="event-time">Horário a confirmar</p></article>
+      <article class="detail-card"><span class="detail-icon">⌖</span><small>ONDE</small><h3 id="event-location">Local do evento</h3><p id="event-address">Endereço completo aqui</p><a id="map-link" class="text-link" href="#" target="_blank" rel="noopener" hidden>Ver localização ↗</a></article>
+      <article class="detail-card dress-code-card">
+        <span class="detail-icon">♡</span>
+        <small>DRESS CODE</small>
+        <h3>Cores do nosso encontro</h3>
+        <p>Escolha seu look em tons de branco, bege ou marrom.</p>
+        <div class="dress-code-colors" aria-label="Cores sugeridas: branco, bege e marrom">
+          <span class="dress-color dress-white" title="Branco"></span>
+          <span class="dress-color dress-beige" title="Bege"></span>
+          <span class="dress-color dress-brown" title="Marrom"></span>
+        </div>
+        <p class="dress-code-label">Branco · Bege · Marrom</p>
+      </article>
+    </div>
+    <p class="details-note">✦ &nbsp; Um dia doce para guardar no coração &nbsp; ✦</p>
+  </section>
+  <section class="section gifts-section" id="presentes">
+    <div class="section-heading"><p class="eyebrow">COM CARINHO</p><h2>Sugestões de presentes</h2><p>Sua presença é nosso maior presente. Se desejar, aqui estão algumas sugestões.</p></div>
+    <div id="gift-list" class="gift-grid"><div class="empty-state">Carregando a lista de presentes…</div></div>
+    <p class="gift-footnote">Escolha com o coração. Obrigado por fazer parte desse momento! ♡</p>
+  </section>
+  <section class="rsvp-section" id="confirmar">
+    <div class="rsvp-decoration left">✧</div>
+    <div class="rsvp-card"><p class="eyebrow">VAMOS CONTAR COM VOCÊ?</p><h2>Confirme sua presença</h2><p class="rsvp-intro">Preencha os campos para nos ajudar a preparar tudo com carinho.</p>
+      <form id="rsvp-form" class="form-stack">
+        <label for="guest-name">Seu nome completo *</label><input id="guest-name" name="name" maxlength="100" autocomplete="name" required placeholder="Como podemos te chamar?">
+        <label for="guest-count">Quantas pessoas irão? *</label><select id="guest-count" name="count" required><option value="" selected disabled>Selecione uma opção</option><option value="1">Somente eu</option><option value="2">2 pessoas</option><option value="3">3 pessoas</option><option value="4">4 pessoas</option><option value="5">5 pessoas</option><option value="6">6 pessoas</option></select>
+        <label for="guest-message">Recadinho (opcional)</label><textarea id="guest-message" name="message" maxlength="500" rows="3" placeholder="Uma mensagem para a família…"></textarea>
+        <button class="button button-gold button-full" type="submit">Confirmar presença <b>♡</b></button>
+        <p id="rsvp-status" class="form-status" role="status"></p>
+      </form>
+    </div><div class="rsvp-decoration right">♡</div>
+  </section>
+  <section class="closing-note"><div class="tiny-bear">🧸</div><p>Mal podemos esperar para compartilhar esse momento com você.</p><h2>Com amor, Stefany e Cristiano</h2><span>✦　♡　✦</span></section>
+</main>
+<footer class="site-footer">
+  <span>Feito com carinho para celebrar uma nova vida</span>
+  <span>♡</span>
+</footer>
+</body></html>
