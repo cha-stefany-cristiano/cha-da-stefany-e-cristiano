@@ -367,3 +367,51 @@
     padding: 18px 15px;
   }
 }
+
+/* Presentes em rolagem horizontal */
+#gift-list.gift-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 4px 22px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Cada presente fica lado a lado */
+#gift-list.gift-grid > * {
+  flex: 0 0 280px;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* Barra de rolagem discreta */
+#gift-list.gift-grid::-webkit-scrollbar {
+  height: 7px;
+}
+
+#gift-list.gift-grid::-webkit-scrollbar-track {
+  background: #f3ece1;
+  border-radius: 10px;
+}
+
+#gift-list.gift-grid::-webkit-scrollbar-thumb {
+  background: #c7aa7d;
+  border-radius: 10px;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 600px) {
+  #gift-list.gift-grid {
+    gap: 14px;
+    padding-bottom: 18px;
+  }
+
+  #gift-list.gift-grid > * {
+    flex-basis: 78%;
+  }
+}
